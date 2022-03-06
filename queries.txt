@@ -1,0 +1,130 @@
+const Pool = require('pg').Pool
+const pool = new Pool({
+        user:'postgres',
+        host:'localhost',
+        database:'guido',
+        password:'123456',
+        port:5432,
+})
+
+const getUsers = (request, response) => {
+        pool.query('SELECT * FROM persona',(error, results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).json(results.rows)
+        })
+}
+
+const getCarros = (request, response) => {
+        pool.query('SELECT * FROM carro',(error, results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).json(results.rows)
+        })
+}
+
+const getUserById =(request, response) => {
+        const id = request.params.id
+
+        pool.query('SELECT cedula, nombre FROM persona WHERE cedula = $1', [id], (error, results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).json(results.rows)
+        })
+}
+
+const getCarroById = (request, response) => {
+        const id = request.params.id
+
+        pool.query('SELECT id, marca from carro WHERE id = $1', [id], (error, results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).json(results.rows)
+        })
+}
+
+const createUser = (request, response) => {
+        const {nombre, cedula} = request.body
+
+        pool.query('INSERT INTO persona (nombre, cedula) VALUES ($1, $2)',[nombre, cedula],(error, results) => {
+                if(error){
+                        throw error
+                }
+                response.status(201).send(`User added with ID: ${result.insertId}`)
+        })
+}
+
+const createCarro = (request, response) => {
+        const {marca, ced_persona} = request.body
+
+        pool.query('INSERT INTO carro (marca, ced_persona) VALUES ($1, $2)',[marca, ced_persona], (error, results) =>{
+                if(error){
+                        throw error
+                }
+                response.status(201).send(`User added with ID: ${result.insertId}`)
+        })
+}
+
+const updateUser = (request, response) => {
+        const id = request.params.id
+        const {nombre} = request.body
+
+        pool.query('UPDATE persona SET nombre = $1 WHERE cedula = $2', [nombre, id], (error, results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).send(`User modified with Cedula: ${id}`)
+        })
+}
+
+const updateCarro = (request, response) => {
+        const id = request.params.id
+        const {marca} = request.body
+
+        pool.query('UPDATE carro SET marca = $1 WHERE id = $2', [marca, id], (error, results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).send(`User modified with Cedula: ${id}`)
+        })
+}
+
+const deleteUser = (request, response) => {
+        const id = request.params.id
+
+        pool.query('DELETE FROM persona WHERE cedula = $1', [id], (error,results) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).send(`User deleted with Cedula: ${id}`)
+        })
+}
+
+const deleteCarro = (request, response) => {
+        const id = request.params.id
+
+        pool.query('DELETE FROM carro WHERE id = $1', [id], (error,resul) => {
+                if (error){
+                        throw error
+                }
+                response.status(200).send(`User deleted with Id: ${id}`)
+        })
+}
+
+
+module.exports = {
+        getUsers,
+        getCarros,
+        getUserById,
+        getCarroById,
+        createUser,
+        createCarro,
+        updateUser,
+        updateCarro,
+        deleteUser,
+        deleteCarro,
+}
