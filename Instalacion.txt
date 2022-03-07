@@ -1,0 +1,19 @@
+1- Ingresar a Ubuntu a una terminal de consola
+2- Instalar PostgreSql con: sudo apt install postgresql postgresql-contrib
+3- Cambiar de usuario con: sudo -i -u postgres 
+4- Ingresa al postgres con: psql
+5- Crear usuario: createuser --interactive
+6- Crear base de datos: createdb guido
+7- Ingresar a la base de datos con: \c guido
+8- Crear base de datos como con el documento adjunto llamado base de datos.txt
+9- Ingresar datos de igual forma
+
+1- Instalar node.js: sudo apt install nodejs
+2- Instalar express: npm install -g express
+3- Crear directorio: mkdir tarea
+4- Dentro de tarea creamos los documentos index, queries de la siguiente forma: sudo nano index.js o sudo nano queries.js ((control + x) para salir y guardar)
+
+Ejecutar index.js: node index.js
+Entrar al navegador a la pagina http://localhost:3000/***aqui el nombre de la tabla que se desea acceder***
+
+Video del funcionamiento del API https://youtu.be/n4BYkcgMJQU
