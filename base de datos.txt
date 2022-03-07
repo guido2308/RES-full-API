@@ -1,0 +1,34 @@
+Create table persona(
+	nombre varchar(),
+	cedula int,
+	primary key (cedula));
+
+Create table carro(
+	marca varchar(30),
+	id serial,
+	ced_persona int,
+	primary key(id));
+
+Alter table carro add constraint fk_cod_persona_cedula foreign key (cod_persona) references persona(cedula);
+
+INSERT INTO persona VALUES ('Guido',1);
+INSERT INTO persona VALUES ('Carlos',2);
+INSERT INTO persona VALUES ('Mariano',3);
+INSERT INTO persona VALUES ('Moises',4);
+INSERT INTO persona VALUES ('Nicole',5);
+INSERT INTO persona VALUES ('Alberto',6);
+INSERT INTO persona VALUES ('Juan',7);
+INSERT INTO persona VALUES ('Miguel',8);
+INSERT INTO persona VALUES ('Daniel',9);
+INSERT INTO persona VALUES ('Diana',10);
+
+INSERT INTO carro (marca, cod_persona) VALUES ('Tesla',1);
+INSERT INTO carro (marca, cod_persona) VALUES ('Lamborghini',2);
+INSERT INTO carro (marca, cod_persona) VALUES ('Ferrari',3);
+INSERT INTO carro (marca, cod_persona) VALUES ('Jaguar',4);
+INSERT INTO carro (marca, cod_persona) VALUES ('BMW',5);
+INSERT INTO carro (marca, cod_persona) VALUES ('Audi',6);
+INSERT INTO carro (marca, cod_persona) VALUES ('Ford',7);
+INSERT INTO carro (marca, cod_persona) VALUES ('Lexus',8);
+INSERT INTO carro (marca, cod_persona) VALUES ('Volvo',9);
+INSERT INTO carro (marca, cod_persona) VALUES ('Mazda',10);
